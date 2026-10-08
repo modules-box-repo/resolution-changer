@@ -1,0 +1,10 @@
+id=resolution-changer
+name=Resolution+DPI Changer
+icon=icon.jpg
+description=Easily change screen resolution and DPI density.
+author=YasserNull
+version=v1.0.0
+versionCode=1
+repository=https://github.com/modules-box-repo/resolution-changer
+install=setup.sh
+permission=shizuku

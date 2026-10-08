@@ -1,0 +1,132 @@
+<!-- Main layout -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resolution Changer</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <h1 class="toolbar-title">Resolution Changer</h1>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon moon" id="themeIconMoon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="theme-icon sun hidden" id="themeIconSun">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
+    </header>
+
+    <main class="main">
+      <section class="device-section">
+        <div class="device-card fade-in">
+          <div class="device-header">
+            <span class="device-title">Display Status</span>
+          </div>
+          <div class="device-grid">
+            <div class="device-stat">
+              <span class="device-stat-label">Physical Size</span>
+              <span class="device-stat-value" id="displayPhysical">-</span>
+            </div>
+            <div class="device-stat">
+              <span class="device-stat-label">Current Size</span>
+              <span class="device-stat-value" id="displayCurrent">-</span>
+            </div>
+            <div class="device-stat">
+              <span class="device-stat-label">Physical DPI</span>
+              <span class="device-stat-value" id="displayPhysicalDpi">-</span>
+            </div>
+            <div class="device-stat">
+              <span class="device-stat-label">Current DPI</span>
+              <span class="device-stat-value" id="displayCurrentDpi">-</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="profiles-section">
+        <h2 class="section-title">Profiles</h2>
+        <div id="loadingSpinner" class="loading-container">
+          <div class="loading-spinner" role="status" aria-label="Loading"></div>
+        </div>
+        <div id="profilesList" class="profiles-list"></div>
+        <div id="emptyState" class="empty-state hidden">
+          No profiles yet
+        </div>
+      </section>
+      <button id="fab" class="fab" aria-label="Create profile">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </main>
+
+    <dialog id="profileDialog" class="dialog">
+      <form id="profileForm">
+        <header class="dialog-header">
+          <h3 id="dialogTitle">New Profile</h3>
+          <button type="button" id="dialogClose" class="icon-btn" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+        <div class="dialog-content">
+          <label class="field">
+            <span class="field-label">Profile name</span>
+            <input type="text" id="profileName" required minlength="1" />
+          </label>
+          <div class="grid-2">
+            <label class="field">
+              <span class="field-label">Width</span>
+              <input type="number" id="widthInput" min="1" step="1" inputmode="numeric" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Height</span>
+              <input type="number" id="heightInput" min="1" step="1" inputmode="numeric" required />
+            </label>
+          </div>
+          <label class="field">
+            <span class="field-label">DPI</span>
+            <input type="number" id="dpiInput" min="1" step="1" inputmode="numeric" />
+          </label>
+          <div class="toggles">
+            <label class="toggle">
+              <input type="checkbox" id="lockAspect" />
+              <span class="toggle-label">Lock aspect ratio</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="autoDpi" />
+              <span class="toggle-label">Auto DPI adjust</span>
+            </label>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" id="testBtn" class="btn">Test</button>
+            <button type="submit" id="saveBtn" class="btn primary" disabled>Save</button>
+          </div>
+          <div id="testStatus" class="status"></div>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast hidden" role="alert"></div>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/profiles.js"></script>
+    <script src="/js/wm.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
